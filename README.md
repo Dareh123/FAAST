@@ -56,7 +56,7 @@ python3 main.py --target ./vulnerable-app --headless
 ## Project Structure
 
 ```
-faast-security-agent/
+FAAST/
 ├── main.py                              # Main entry point
 ├── agent/
 │   ├── __init__.py
