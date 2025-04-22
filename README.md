@@ -1,7 +1,7 @@
 # FAAST
 Prototype of FAAST (Full Agentic Application Security Testing), FAAST = SAST + DAST + LLM agents
 
-FAAST is an AI agent security testing agent that combines SAST (Static Application Security Testing) and DAST (Dynamic Application Security Testing) for web applications. It makes the link between both by providing the results of SAST to the DAST, by understanding how to reach each vulnerability.
+FAAST is an AI agent for security testing that combines SAST (Static Application Security Testing) and DAST (Dynamic Application Security Testing) for web applications. It makes the link between both by providing the results of SAST to the DAST, by understanding how to reach each vulnerability.
 
 In the demo below, the agent will spot an sql injection and a command injection in source code (SAST), understand how to reach them, understand how to launch the application and finally exploit the two vulnerabilities in the live environment (DAST) with a browser :  
 
