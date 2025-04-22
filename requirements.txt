@@ -1,0 +1,17 @@
+# Core dependencies
+python-dotenv==1.0.0
+requests==2.31.0
+
+# Fixed dependencies for compatibility
+httpx==0.27.2
+pydantic>=2.10.0
+rich>=13.9.4
+openai>=1.6.1,<2.0.0
+tiktoken>=0.5.2,<0.6.0
+
+# LLM API dependencies
+anthropic==0.16.0
+
+# DAST dependencies
+selenium==4.16.0
+webdriver-manager==4.0.1
