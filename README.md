@@ -9,10 +9,10 @@ In the demo below, the agent will spot an sql injection and a command injection 
 
 ## Features
 
-Static Analysis (SAST): Uses LLM to identify vulnerabilities in the source code, but the architecture is modular so that it can use any traditional SAST tool
-Autonomous launch : Understands from the codebase how to launch the web app, before going for the DAST
-Dynamic Analysis (DAST): Automatically exploits and verifies vulnerabilities in the running application
-Vulnerability verification : Uses LLM to verify if the exploited vulnerability with the DAST agent is confirmed
+Static Analysis (SAST): Uses LLM to identify vulnerabilities in the source code, but the architecture is modular so that it can use any traditional SAST tool  
+Autonomous launch : Understands from the codebase how to launch the web app, before going for the DAST  
+Dynamic Analysis (DAST): Automatically exploits and verifies vulnerabilities in the running application  
+Vulnerability verification : Uses LLM to verify if the exploited vulnerability with the DAST agent is confirmed  
 
 ## Installation
 
