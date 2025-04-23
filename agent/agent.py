@@ -11,7 +11,7 @@ from agent_tools.dast.dast_act import DASTAct
 class SecurityAgent:
     """
     Comprehensive security agent that coordinates SAST and DAST approaches for full
-    automated application security testing (FAAST).
+    agentic application security testing (FAAST).
     """
     
     def __init__(self):
