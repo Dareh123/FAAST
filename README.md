@@ -7,7 +7,7 @@ Note : for now it's a POC that works in a few cases, the goal is to generalize t
 
 In the demo below, the agent will spot an sql injection and a command injection in source code (SAST), understand how to reach them, understand how to launch the application and finally exploit the two vulnerabilities in the live environment (DAST) with a browser :  
 
-![Demo](./demo.gif)
+![Demo](demo.gif)
 
 ## Features
 
