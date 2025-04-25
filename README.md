@@ -9,7 +9,8 @@ In the demo below, the agent will spot an sql injection and a command injection 
 
 ![Demo](./demo.gif)  
 
-FAAST is also on Product Hunt !  Upvote if you like it ;)
+FAAST is also on Product Hunt !  Upvote if you like it ;)  
+
 <a href="https://www.producthunt.com/posts/faast-2?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-faast&#0045;2" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=957551&theme=light&t=1745566688507" alt="FAAST - Full&#0032;agentic&#0032;application&#0032;security&#0032;testing | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
 ## Features
