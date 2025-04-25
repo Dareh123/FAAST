@@ -3,13 +3,14 @@ Prototype of FAAST (Full Agentic Application Security Testing), FAAST = SAST + D
 
 FAAST is an AI agent for security testing that combines SAST (Static Application Security Testing) and DAST (Dynamic Application Security Testing) for web applications. It makes the link between both by providing the results of SAST to the DAST, by understanding how to reach each vulnerability.
 
-Note : for now it's a POC that works in a few cases, the goal is to generalize the concept to detect many more vulns, understand how to reach them dynamically, and exploit them. ;)  
+Note : for now it's a POC that works in a few cases, the goal is to generalize the concept to detect many more vulns, understand how to reach them dynamically, and exploit them.
 
 In the demo below, the agent will spot an sql injection and a command injection in source code (SAST), understand how to reach them, understand how to launch the application and finally exploit the two vulnerabilities in the live environment (DAST) with a browser :  
 
 ![Demo](./demo.gif)  
 
-If you don't see the gif here's the mp4 demo : ![Demo](demo.mp4)  
+FAAST is also on Product Hunt !  Upvote if you like it ;)
+<a href="https://www.producthunt.com/posts/faast-2?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-faast&#0045;2" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=957551&theme=light&t=1745566688507" alt="FAAST - Full&#0032;agentic&#0032;application&#0032;security&#0032;testing | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
 ## Features
 
