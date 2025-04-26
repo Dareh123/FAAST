@@ -120,3 +120,11 @@ The FAAST agent is focused mainly on two vulnerabilities for the moment, but its
 
 - **SQL Injection**: Detecting improper handling of SQL queries
 - **Command Injection**: Finding OS command execution vulnerabilities
+
+## Coming next
+
+- [ ] Use open-source SAAST tool for detecting more vulnerabilities
+- [ ] Improved vulnerability path tracing
+- [ ] Simpler and direct App launcher
+- [ ] Improved exploit verification
+- [ ] Vision capabilities
