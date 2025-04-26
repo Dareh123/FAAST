@@ -16,6 +16,14 @@ Autonomous launch : Understands from the codebase how to launch the web app, bef
 Dynamic Analysis (DAST): Automatically exploits and verifies vulnerabilities in the running application  
 Vulnerability verification : Uses LLM to verify if the exploited vulnerability with the DAST agent is confirmed  
 
+## Coming next
+
+- [ ] Use open-source SAAST tool for detecting more vulnerabilities
+- [ ] Improved vulnerability path tracing
+- [ ] Simpler and direct App launcher
+- [ ] Improved exploit verification
+- [ ] Vision capabilities
+
 ## Installation
 
 1. Clone this repository:
@@ -120,11 +128,3 @@ The FAAST agent is focused mainly on two vulnerabilities for the moment, but its
 
 - **SQL Injection**: Detecting improper handling of SQL queries
 - **Command Injection**: Finding OS command execution vulnerabilities
-
-## Coming next
-
-- [ ] Use open-source SAAST tool for detecting more vulnerabilities
-- [ ] Improved vulnerability path tracing
-- [ ] Simpler and direct App launcher
-- [ ] Improved exploit verification
-- [ ] Vision capabilities
