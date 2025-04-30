@@ -5,22 +5,21 @@ FAAST is an AI agent for security testing that combines SAST (Static Application
 
 Note : for now it's a POC that works in a few cases, the goal is to generalize the concept to detect many more vulns, understand how to reach them dynamically, and exploit them.
 
-In the demo below, the agent will spot an sql injection and a command injection in source code (SAST), understand how to reach them, understand how to launch the application and finally exploit the two vulnerabilities in the live environment (DAST) with a browser :  
+In the demo below, the agent will spot an sql injection and a command injection in source code (SAST), understand how to reach them, and finally exploit the two vulnerabilities in the live environment (DAST) with a browser :  
 
 ![Demo](./demo.gif)  
 
 ## Features
 
 Static Analysis (SAST): Uses LLM to identify vulnerabilities in the source code, but the architecture is modular so that it can use any traditional SAST tool. Saves the context of each vulnerability to know how to reach it later on with the DAST  
-Autonomous launch : Understands from the codebase how to launch the web app, before going for the DAST  
 Dynamic Analysis (DAST): Automatically exploits and verifies vulnerabilities in the running application  
 Vulnerability verification : Uses LLM to verify if the exploited vulnerability with the DAST agent is confirmed  
 
 ## Coming next
 
+- [x] Simpler and direct App launcher
 - [ ] Use open-source SAAST tool for detecting more vulnerabilities
 - [ ] Improved vulnerability path tracing
-- [ ] Simpler and direct App launcher
 - [ ] Improved exploit verification
 - [ ] Vision capabilities
 
@@ -47,24 +46,24 @@ Vulnerability verification : Uses LLM to verify if the exploited vulnerability w
 Run the FAAST security agent on a target application:
 
 ```bash
-python3 main.py --target ./vulnerable_app
+python3 main.py --target ./vulnerable_app --url http://localhost:3000
 ```
 
 This will:
 1. Run SAST analysis to identify potential vulnerabilities in the code
-2. Automatically launch the application
-3. Perform DAST analysis to confirm exploitable vulnerabilities
+2. Perform DAST analysis on the target url to confirm exploitable vulnerabilities
 4. Outputs a comprehensive security report 
 
 ### Command-line Options
 
 - `--target`: Target application directory path (default: 'vulnerable_app')
-- `--headless`: Run browser in headless mode for DAST testing
+- `--url`: Url of the application to test with the DAST
+- `--headless`: Run browser in headless mode for DAST
 
 Example with headless option :
 
 ```bash
-python3 main.py --target ./vulnerable-app --headless
+python3 main.py --target ./vulnerable-app --url http://localhost:3000 --headless
 ```
 
 ## Project Structure
@@ -104,16 +103,7 @@ The SAST scanner analyzes your application code to identify potential security v
 - Uses LLMs to identify vulnerabilities
 - Detects context of the vulnerability like the endpoint information (routes, parameters) for dynamic testing
 
-### 2. Application Launch
-
-The AppLauncher automatically:
-
-- Extracts launch instructions from your project's README.md
-- Handles dependencies installation (`npm install`, etc.)
-- Launches the application with appropriate environment variables
-- Supports various application types (Node.js, Docker, etc.)
-
-### 3. Dynamic Analysis (DAST)
+### 2. Dynamic Analysis (DAST)
 
 The DASTAct component:
 
