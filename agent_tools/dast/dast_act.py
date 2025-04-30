@@ -18,7 +18,7 @@ class DASTAct:
     exploitation strategies to verify vulnerabilities found in SAST analysis.
     """
     
-    def __init__(self, base_url=None):
+    def __init__(self, base_url, headless):
         """
         Initialize the DAST actor with configuration for the browser automation.
         
@@ -26,10 +26,11 @@ class DASTAct:
             base_url: Base URL of the application under test (default: http://localhost:3000)
         """
         self.base_url = base_url or "http://localhost:3000"
+        self.headless = headless
         self.driver = None
         self.exploitation_results = []
     
-    def setup_browser(self, headless=False):
+    def setup_browser(self):
         """
         Set up the browser for automation.
         
@@ -37,7 +38,7 @@ class DASTAct:
             headless: Whether to run the browser in headless mode (default: False)
         """
         chrome_options = Options()
-        if headless:
+        if self.headless:
             chrome_options.add_argument("--headless")
             
         chrome_options.add_argument("--window-size=1920,1080")
@@ -275,7 +276,7 @@ class DASTAct:
         unconfirmed_vulnerabilities = []
         
         try:
-            self.setup_browser(headless=False)  # Show the browser for visual confirmation
+            self.setup_browser()  # Show the browser for visual confirmation
             
             for vuln in vulnerabilities:
                 print(f"🤖 Testing {vuln['vulnerability_type']} in {vuln['file']}")

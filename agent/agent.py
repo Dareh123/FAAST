@@ -1,11 +1,7 @@
-import os
-import sys
-import json
 import time
 from pathlib import Path
 
 from agent_tools.sast.sast_tool import SastScan
-from agent_tools.dast.app_launcher import AppLauncher
 from agent_tools.dast.dast_act import DASTAct
 
 class SecurityAgent:
@@ -17,10 +13,9 @@ class SecurityAgent:
     def __init__(self):
         """Initialize the security agent with scanners and tools."""
         self.sast_scanner = SastScan()
-        self.app_launcher = AppLauncher()
-        self.dast_actor = None  # Will be initialized after app is launched
+        self.dast_actor = None
         
-    def run_faast(self, target_path, headless=False):
+    def run_faast(self, target_path, base_url, headless=False):
         """
         Run a complete security scan pipeline (FAAST) on the target application.
         
@@ -39,19 +34,13 @@ class SecurityAgent:
         print("\n🤖 I'm performing static analysis (SAST) now.")
         sast_results = self._run_sast(absolute_path)
         
-        # Step 2: Launch the application
-        print("\n🤖 Launching application for dynamic testing.")
-        launch_success = self._launch_application(absolute_path)
+        # Step 2: Run DAST (we suppose the app is running)
+        dast_results = self._run_dast(sast_results, base_url, headless)
         
-        # Step 3: Run DAST if application launched successfully
-        dast_results = {"status": "not_run", "message": "Application could not be launched"}
-        if launch_success:
-            dast_results = self._run_dast(sast_results, headless)
-        
-        # Step 4: Combine results and save report
+        # Step 3: Combine results and save report
         combined_results = self._combine_results(sast_results, dast_results)
         
-        # Step 5: Print summary
+        # Step 4: Print summary
         self._print_summary(combined_results)
         
         return combined_results
@@ -89,32 +78,7 @@ class SecurityAgent:
             print(f"❌ Error during SAST scan: {str(e)}")
             return {"findings": [], "total_files": 0, "files_with_issues": 0, "total_vulnerabilities": 0}
     
-    def _launch_application(self, target_path):
-        """
-        Launch the target application for dynamic testing.
-        
-        Args:
-            target_path: Path to the target application
-            
-        Returns:
-            Boolean indicating whether launch was successful
-        """
-        try:
-            launch_success = self.app_launcher.launch(target_path)
-            
-            if launch_success:
-                print(f"🤖 Application launched. Waiting for it to initialize on port 3000.")
-                time.sleep(10)  # Wait for app to fully start
-                return True
-            else:
-                print(f"❌ Failed to launch application")
-                return False
-                
-        except Exception as e:
-            print(f"❌ Error launching application: {str(e)}")
-            return False
-    
-    def _run_dast(self, sast_results, headless=False):
+    def _run_dast(self, sast_results, base_url, headless=False):
         """
         Run dynamic analysis on the running application.
         
@@ -127,7 +91,7 @@ class SecurityAgent:
         """
         try:
             # Initialize DAST actor
-            self.dast_actor = DASTAct()  # Default: http://localhost:3000
+            self.dast_actor = DASTAct(base_url,headless=headless)  # Default: http://localhost:3000
             
             # Check if we have vulnerabilities to test
             vulnerabilities = sast_results.get("findings", [])
