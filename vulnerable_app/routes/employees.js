@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     });
 });
 
-// GET /employees?id=:id - Get employee by ID (vulnerable to SQL injection)
+// GET /employees?id=:id - Get employee by ID
 router.get('/', (req, res) => {
     const id = req.query.id;
     
