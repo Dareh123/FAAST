@@ -2,7 +2,7 @@ import time
 from pathlib import Path
 
 from agent_tools.sast.sast_tool import SastScan
-from agent_tools.dast.dast_act import DASTAct
+from agent_tools.dast.dast_act import DASTScan
 
 class SecurityAgent:
     """
@@ -91,7 +91,7 @@ class SecurityAgent:
         """
         try:
             # Initialize DAST actor
-            self.dast_actor = DASTAct(base_url,headless=headless)  # Default: http://localhost:3000
+            self.dast_actor = DASTScan(base_url,headless=headless)  # Default: http://localhost:3000
             
             # Check if we have vulnerabilities to test
             vulnerabilities = sast_results.get("findings", [])

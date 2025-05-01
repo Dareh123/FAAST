@@ -105,7 +105,7 @@ The SAST scanner analyzes your application code to identify potential security v
 
 ### 2. Dynamic Analysis (DAST)
 
-The DASTAct component:
+The DASTScan component:
 
 - Uses information from SAST to generate precise exploitation strategies
 - Automates a real browser to attempt exploitation

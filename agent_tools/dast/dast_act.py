@@ -12,7 +12,7 @@ from selenium.common.exceptions import TimeoutException, WebDriverException
 from llm.llm_service import get_json_llm_response
 from llm.prompts.prompts_dast import EXPLOIT_STRATEGY_PROMPT, VERIFICATION_PROMPT
 
-class DASTAct:
+class DASTScan:
     """
     Dynamic Application Security Testing (DAST) tool that uses LLM-guided
     exploitation strategies to verify vulnerabilities found in SAST analysis.
@@ -33,9 +33,6 @@ class DASTAct:
     def setup_browser(self):
         """
         Set up the browser for automation.
-        
-        Args:
-            headless: Whether to run the browser in headless mode (default: False)
         """
         chrome_options = Options()
         if self.headless:
@@ -151,7 +148,7 @@ class DASTAct:
         result = {
             "vulnerability": vulnerability,
             "strategy": strategy,
-            "success": False,
+            "success": False,  # Default to False, LLM will determine actual success
             "page_content": "",
             "notes": []
         }
@@ -160,10 +157,6 @@ class DASTAct:
             # Build the URL based on strategy
             url = self.build_url(strategy)
             result["notes"].append(f"Navigating to: {url}")
-            
-            # Generate a unique ID for this test
-            timestamp = int(time.time())
-            vuln_type = vulnerability['vulnerability_type'].replace(' ', '_').lower()
             
             # Navigate to the URL
             self.driver.get(url)
@@ -174,28 +167,9 @@ class DASTAct:
             # Get the page source for verification
             result["page_content"] = self.driver.page_source
             
-            # Check for common error messages in the response that could indicate successful exploitation
+            # Get page text for LLM verification (without direct verification here)
             page_text = self.driver.find_element(By.TAG_NAME, "body").text
-            
-            # Look for SQL error indicators
-            sql_error_indicators = [
-                "SQL", "syntax error", "database error", "SQLITE_ERROR", 
-                "MySQL", "PostgreSQL", "query failed"
-            ]
-            
-            # Look for command injection indicators
-            cmd_error_indicators = [
-                "command", "not found", "syntax error", "Permission denied",
-                "/bin/", "/etc/", "stdout", "stderr"
-            ]
-            
-            if any(indicator.lower() in page_text.lower() for indicator in sql_error_indicators) and "SQL" in vulnerability['vulnerability_type']:
-                result["notes"].append("SQL error indicators found in response")
-                result["success"] = True
-            
-            if any(indicator.lower() in page_text.lower() for indicator in cmd_error_indicators) and "Command" in vulnerability['vulnerability_type']:
-                result["notes"].append("Command execution indicators found in response")
-                result["success"] = True
+            result["page_text"] = page_text
             
             return result
             
