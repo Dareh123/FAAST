@@ -18,9 +18,9 @@ Vulnerability verification : Uses LLM to verify if the exploited vulnerability w
 ## Coming next
 
 - [x] Simpler and direct App launcher
+- [x] Simpler and improved exploit verification
 - [ ] Use open-source SAAST tool for detecting more vulnerabilities
 - [ ] Improved vulnerability path tracing
-- [ ] Improved exploit verification
 - [ ] Vision capabilities
 
 ## Installation
